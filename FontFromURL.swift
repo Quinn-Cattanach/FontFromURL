@@ -7,14 +7,14 @@
 import Foundation
 #if os(macOS)
 import Cocoa
-typealias Font = NSFont
+typealias PlatformFont = NSFont
 #elseif os(iOS)
 import UIKit
-typealias Font = UIFont
+typealias PlatformFont = UIFont
 #endif
 
-extension Font {
-    class func createFontFromURL(_ absoluteURL: URL, size: CGFloat = 12.0) -> Font? {
+extension PlatformFont {
+    class func createFontFromURL(_ absoluteURL: URL, size: CGFloat = 12.0) -> PlatformFont? {
         
         if let cfbr = CFBridgingRetain(absoluteURL) {
             
@@ -23,7 +23,7 @@ extension Font {
             if let dataProvider = CGDataProvider(url: cfURL),
                let cgFont = CGFont(dataProvider) {
                 
-                let font: Font = CTFontCreateWithGraphicsFont(cgFont, 24.0, nil, nil)
+                let font: PlatformFont = CTFontCreateWithGraphicsFont(cgFont, 24.0, nil, nil)
                 return font
             }
         }
