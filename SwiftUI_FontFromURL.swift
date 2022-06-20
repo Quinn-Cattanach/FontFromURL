@@ -23,8 +23,9 @@ extension Font {
     }
     init?(_ fontName: String,
             fileExtension: String? = nil,
+            bundle: Bundle = Bundle.main,
             size: CGFloat = 12.0) {
-        if let url = Bundle.main.url(forResource: fontName, 
+        if let url = bundle.url(forResource: fontName, 
                                      withExtension: fileExtension),
                                      let font = Self.init(url, size: size) {
             self = font
